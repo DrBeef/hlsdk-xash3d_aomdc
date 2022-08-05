@@ -179,8 +179,19 @@ void CSpear::CheckSmack(float speed)
 
 			//It's a knife, nasty sharp edges, it doesn't have to be swung very hard to inflict full damage but it shouldn't inflight more than
 			//its full damage
-			pEntity->TraceAttack(m_pPlayer->pev, gSkillData.plrDmgKnife * (1.f / hitCount), gpGlobals->v_up, &tr, DMG_CLUB);
+			pEntity->TraceAttack(m_pPlayer->pev, gSkillData.plrDmgKnife * (1.f / hitCount), gpGlobals->v_up, &tr, DMG_SPEAR);
 			ApplyMultiDamage( m_pPlayer->pev, m_pPlayer->pev );
+
+			if (FBitSet(m_pPlayer->pev->flags, FL_INWATER))
+			{
+				SendWeaponAnim(SPEAR_ELECTROCUTE);
+				m_flNextPrimaryAttack = UTIL_WeaponTimeBase() + 2.34;
+			#ifndef CLIENT_DLL
+				UTIL_ScreenFade(m_pPlayer, Vector(255, 255, 255), 0.5, 0.0, 100, FFADE_IN);
+				m_pPlayer->TakeDamage(m_pPlayer->pev, m_pPlayer->pev, DAMAGE_AIM, DMG_GENERIC);
+				EMIT_SOUND(ENT(m_pPlayer->pev), CHAN_ITEM, "weapons/spear_electrocute.wav", 1, ATTN_NORM);
+			#endif
+			}
 
 			if( pEntity->Classify() != CLASS_NONE && pEntity->Classify() != CLASS_MACHINE )
 			{
