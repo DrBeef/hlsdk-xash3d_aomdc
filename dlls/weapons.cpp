@@ -559,7 +559,7 @@ void CBasePlayerItem::DefaultTouch( CBaseEntity *pOther )
 
 	CBasePlayer *pPlayer = (CBasePlayer *)pOther;
 
-	if( !( pPlayer->m_afButtonPressed & IN_USE ))
+	if( !( pPlayer->m_afButtonPressed & ( IN_USE | IN_USE2 ) ))
 		return;
 
 	for( int i = 0; i < MAX_ITEM_TYPES; i++ )
@@ -1164,7 +1164,7 @@ void CBasePlayerAmmo::DefaultTouch( CBaseEntity *pOther )
 	
 	CBasePlayer *pPlayer = (CBasePlayer *)pOther;
 
-	if( !( pPlayer->m_afButtonPressed & IN_USE ) )
+	if( !( pPlayer->m_afButtonPressed & ( IN_USE | IN_USE2 ) ) )
 		return;
 
 	if( AddAmmo( pOther ) )
@@ -1454,7 +1454,7 @@ void CWeaponBox::Touch( CBaseEntity *pOther )
 	CBasePlayer *pPlayer = (CBasePlayer *)pOther;
 	int i;
 
-	if( !( pPlayer->m_afButtonPressed & IN_USE ) )
+	if( !( pPlayer->m_afButtonPressed & ( IN_USE | IN_USE2 ) ) )
 		return;
 
 	for( i = 0; i < MAX_ITEM_TYPES; i++ )

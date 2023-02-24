@@ -238,7 +238,7 @@ class CItemBattery : public CItem
 			return FALSE;
 		}
 
-		if( !( pPlayer->m_afButtonPressed & IN_USE ) )
+		if( !( pPlayer->m_afButtonPressed & ( IN_USE | IN_USE2 ) ) )
 			return FALSE;
 
 		if( ( pPlayer->pev->armorvalue < MAX_NORMAL_BATTERY ) &&
@@ -340,7 +340,7 @@ class CItemFlashlight : public CItem
 	}
 	BOOL MyTouch(CBasePlayer *pPlayer)
 	{
-		if( !( pPlayer->m_afButtonPressed & IN_USE ) )
+		if( !( pPlayer->m_afButtonPressed & ( IN_USE | IN_USE2 ) ) )
 			return FALSE;
 
 		if( pPlayer->pev->weapons & ( 1 << WEAPON_FLASHLIGHT ) )
