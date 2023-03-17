@@ -69,7 +69,7 @@ BOOL CHealthKit::MyTouch( CBasePlayer *pPlayer )
 		return FALSE;
 	}
 
-	if( !( pPlayer->m_afButtonPressed & IN_USE ) )
+	if( !( pPlayer->m_afButtonPressed & ( IN_USE | IN_USE2 ) ) )
 		return FALSE;
 
 	if( pPlayer->TakeHealth( gSkillData.healthkitCapacity, DMG_GENERIC ) )
